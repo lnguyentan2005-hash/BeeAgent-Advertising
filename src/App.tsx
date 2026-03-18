@@ -87,7 +87,6 @@ function HeroSection() {
       
       await fetch(webhookUrl, {
         method: 'POST',
-        mode: 'no-cors',
         headers: {
           'Content-Type': 'application/json',
         },
