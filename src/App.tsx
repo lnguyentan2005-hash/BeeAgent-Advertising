@@ -79,28 +79,39 @@ function HeroSection() {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
+  e.preventDefault();
+  setIsSubmitting(true);
+  
+  try {
+    const webhookUrl = 'https://hook.eu1.make.com/vjfsrp4ih8hklckmiq6a5lxew28kk3d8';
     
-    try {
-      const webhookUrl = 'https://hook.eu1.make.com/vjfsrp4ih8hklckmiq6a5lxew28kk3d8';
-      
-      await fetch(webhookUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData)
-      });
-      
+    // Chuyển dữ liệu thành dạng application/x-www-form-urlencoded
+    const params = new URLSearchParams();
+    params.append('name', formData.name);
+    params.append('phone', formData.phone);
+    params.append('email', formData.email);
+    params.append('problem', formData.problem);
+    
+    const response = await fetch(webhookUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: params
+    });
+    
+    if (response.ok) {
       setIsSubmitted(true);
-    } catch (error) {
-      console.error('Error submitting form:', error);
-      setIsSubmitted(true);
-    } finally {
-      setIsSubmitting(false);
+    } else {
+      alert('Có lỗi xảy ra khi gửi thông tin. Vui lòng thử lại sau.');
     }
-  };
+  } catch (error) {
+    console.error('Error submitting form:', error);
+    alert('Không thể kết nối đến máy chủ. Vui lòng kiểm tra mạng.');
+  } finally {
+    setIsSubmitting(false);
+  }
+};
 
   return (
     <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
