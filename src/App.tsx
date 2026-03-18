@@ -156,7 +156,7 @@ function HeroSection() {
             <div className="absolute inset-0 bg-gradient-to-br from-amber-500/20 to-purple-600/20 blur-2xl rounded-3xl" />
             
             <div className="relative bg-slate-900/80 backdrop-blur-xl border border-slate-800 p-8 rounded-3xl shadow-2xl">
-              {!isSubmitted ? (
+                       {!isSubmitted ? (
                 <>
                   <h3 className="text-2xl font-bold mb-2">Nhận Kiểm Toán Quảng Cáo Miễn Phí</h3>
                   <p className="text-slate-400 text-sm mb-6">Điền thông tin để chuyên gia của chúng tôi phân tích chiến dịch của bạn.</p>
@@ -225,6 +225,29 @@ function HeroSection() {
                     <CheckCircle2 className="w-10 h-10 text-emerald-400" />
                   </div>
                   <h3 className="text-2xl font-bold mb-4">Cảm ơn bạn đã đặt lịch!</h3>
+                  
+                  {/* Hiển thị thông tin đã gửi - 4 cột */}
+                  <div className="bg-slate-800/50 rounded-xl p-5 mb-6 text-left">
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <p className="text-slate-400 text-xs mb-1">Họ tên</p>
+                        <p className="font-medium text-slate-200 break-words">{formData.name}</p>
+                      </div>
+                      <div>
+                        <p className="text-slate-400 text-xs mb-1">Email</p>
+                        <p className="font-medium text-slate-200 break-words">{formData.email}</p>
+                      </div>
+                      <div>
+                        <p className="text-slate-400 text-xs mb-1">Số điện thoại</p>
+                        <p className="font-medium text-slate-200 break-words">{formData.phone}</p>
+                      </div>
+                      <div>
+                        <p className="text-slate-400 text-xs mb-1">Vấn đề</p>
+                        <p className="font-medium text-slate-200 break-words">{formData.problem || 'Không có'}</p>
+                      </div>
+                    </div>
+                  </div>
+
                   <p className="text-slate-400 mb-8 leading-relaxed">
                     Đội ngũ BeeAgent Advertising đã nhận được thông tin và sẽ sớm liên lạc với bạn để tư vấn giải pháp tối ưu nhất.
                   </p>
